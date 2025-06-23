@@ -1,7 +1,7 @@
 import './queuemanager.css'
 import { useState } from 'react'
 
-function CashierQueue({ queue, onAccept, assigned, onAcceptPriority }) {
+function CashierQueue({ queue, onAccept, assigned, onAcceptPriority, onAssignOne, onAssignAll }) {
   const [customer, setCustomer] = useState('')
   const [isPriority, setIsPriority] = useState(false)
   const [autoId, setAutoId] = useState(1)
@@ -23,7 +23,7 @@ function CashierQueue({ queue, onAccept, assigned, onAcceptPriority }) {
 
   return (
     <div className="cashier-queue-container">
-      <div className="cashier-queue-box">
+      <div className="cashier-queue-box" data-qlen={queue.length}>
         <h2>Cashier Queue</h2>
         <div className="cashier-queue-controls">
           <input
@@ -43,6 +43,14 @@ function CashierQueue({ queue, onAccept, assigned, onAcceptPriority }) {
           </label>
           <button onClick={handleAccept}>
             Accept Customer
+          </button>
+        </div>
+        <div className="cashier-queue-controls" style={{ marginTop: 8 }}>
+          <button onClick={onAssignOne} disabled={queue.length === 0}>
+            Assign Customer
+          </button>
+          <button onClick={onAssignAll} disabled={queue.length === 0} style={{ marginLeft: 8 }}>
+            Assign All Customers
           </button>
         </div>
         <div className="cashier-queue-assigned">

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './queuemanager.css'
 
-function RegularCashier({ cashierQueue, onServe, isIdle, cashierId, assigned }) {
+function RegularCashier({ cashierQueue, onServe, isIdle, cashierId, assigned, onRemoveFromQueue, onRemoveAssigned }) {
   const timerRef = useRef(null)
   const [secondsLeft, setSecondsLeft] = useState(null)
   const [timerKey, setTimerKey] = useState(0)
@@ -46,19 +46,56 @@ function RegularCashier({ cashierQueue, onServe, isIdle, cashierId, assigned }) 
         <strong>Status:</strong> {isIdle ? 'Idle' : 'Serving'}
       </div>
       <div style={{ marginBottom: 16 }}>
-        <strong>Current Customer:</strong> {assigned ? assigned : 'None'}
+        <strong>Current Customer:</strong>
+        {assigned ? (
+          <>
+            {assigned}
+            <button 
+  onClick={() => onRemoveFromQueue?.(idx)} 
+  style={{ 
+    marginLeft: 8, 
+    backgroundColor: 'black', 
+    color: 'red', 
+    fontSize: '12px', 
+    padding: '2px 6px', 
+    border: 'none', 
+    borderRadius: '3px',
+    cursor: 'pointer'
+  }}
+>
+  x
+</button>
+          </>
+        ) : 'None'}
       </div>
       <div className="cashier-queue-list" style={{ marginBottom: 16 }}>
         <strong>Queue:</strong>
         {cashierQueue.length === 0 ? (
-          <span> No customers in queue.</span>
-        ) : (
-          <ol>
-            {cashierQueue.map((c, idx) => (
-              <li key={idx}>{c}</li>
-            ))}
-          </ol>
-        )}
+  <span> No customers in queue.</span>
+) : (
+  <ol>
+    {cashierQueue.map((c, idx) => (
+      <li key={idx}>
+        {c}
+        <button 
+  onClick={() => onRemoveFromQueue?.(idx)} 
+  style={{ 
+    marginLeft: 8, 
+    backgroundColor: 'black', 
+    color: 'red', 
+    fontSize: '12px', 
+    padding: '2px 6px', 
+    border: 'none', 
+    borderRadius: '3px',
+    cursor: 'pointer'
+  }}
+>
+  x
+</button>
+      </li>
+    ))}
+  </ol>
+)}
       </div>
       {!isIdle && assigned && (
         <div className="cashier-timer">

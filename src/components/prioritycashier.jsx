@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './queuemanager.css'
 
-function PriorityCashier({ assigned, onServe, isIdle, queue, cashierId, stealFromOther }) {
+function PriorityCashier({ assigned, onServe, isIdle, queue, cashierId, stealFromOther, onRemoveFromQueue, onRemoveAssigned }) {
   const timerRef = useRef(null)
   const [secondsLeft, setSecondsLeft] = useState(null)
   const [timerKey, setTimerKey] = useState(0)
@@ -48,7 +48,27 @@ function PriorityCashier({ assigned, onServe, isIdle, queue, cashierId, stealFro
         <strong>Status:</strong> {isIdle ? 'Idle' : 'Serving'}
       </div>
       <div style={{ marginBottom: 16 }}>
-        <strong>Current Customer:</strong> {assigned ? assigned : 'None'}
+        <strong>Current Customer:</strong>
+        {assigned ? (
+          <>
+            {assigned}
+            <button 
+  onClick={() => onRemoveFromQueue?.(idx)} 
+  style={{ 
+    marginLeft: 8, 
+    backgroundColor: 'black', 
+    color: 'red', 
+    fontSize: '12px', 
+    padding: '2px 6px', 
+    border: 'none', 
+    borderRadius: '3px',
+    cursor: 'pointer'
+  }}
+>
+  x
+</button>
+          </>
+        ) : 'None'}
       </div>
       <div className="cashier-queue-list" style={{ marginBottom: 16 }}>
         <strong>Queue:</strong>
@@ -57,7 +77,24 @@ function PriorityCashier({ assigned, onServe, isIdle, queue, cashierId, stealFro
         ) : (
           <ol>
             {queue.map((c, idx) => (
-              <li key={idx}>{c}</li>
+              <li key={idx}>
+                {c}
+                <button 
+  onClick={() => onRemoveFromQueue?.(idx)} 
+  style={{ 
+    marginLeft: 8, 
+    backgroundColor: 'black', 
+    color: 'red', 
+    fontSize: '12px', 
+    padding: '2px 6px', 
+    border: 'none', 
+    borderRadius: '3px',
+    cursor: 'pointer'
+  }}
+>
+  x
+</button>
+              </li>
             ))}
           </ol>
         )}
