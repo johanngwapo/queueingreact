@@ -63,7 +63,7 @@ function RegularCashier({ cashierQueue, onServe, isIdle, cashierId, assigned, on
     cursor: 'pointer'
   }}
 >
-  x
+  X
 </button>
           </>
         ) : 'None'}
@@ -90,7 +90,7 @@ function RegularCashier({ cashierQueue, onServe, isIdle, cashierId, assigned, on
     cursor: 'pointer'
   }}
 >
-  x
+  X
 </button>
       </li>
     ))}

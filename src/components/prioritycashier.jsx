@@ -65,7 +65,7 @@ function PriorityCashier({ assigned, onServe, isIdle, queue, cashierId, stealFro
     cursor: 'pointer'
   }}
 >
-  x
+  X
 </button>
           </>
         ) : 'None'}
@@ -92,7 +92,7 @@ function PriorityCashier({ assigned, onServe, isIdle, queue, cashierId, stealFro
     cursor: 'pointer'
   }}
 >
-  x
+  X
 </button>
               </li>
             ))}

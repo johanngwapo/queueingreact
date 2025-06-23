@@ -49,7 +49,7 @@ function CashierQueue({ queue, onAccept, assigned, onAcceptPriority, onAssignOne
           <button onClick={onAssignOne} disabled={queue.length === 0}>
             Assign Customer
           </button>
-          <button onClick={onAssignAll} disabled={queue.length === 0} style={{ marginLeft: 8 }}>
+          <button onClick={onAssignAll} disabled={queue.length === 0} >
             Assign All Customers
           </button>
         </div>
